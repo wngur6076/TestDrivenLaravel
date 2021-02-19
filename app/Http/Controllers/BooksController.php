@@ -9,12 +9,23 @@ class BooksController extends Controller
 {
     public function store()
     {
-        Book::create($this->vadateRequest());
+        $book = Book::create($this->vadateRequest());
+
+        return redirect($book->path());
     }
 
     public function update(Book $book)
     {
         $book->update($this->vadateRequest());
+
+        return redirect($book->path());
+    }
+
+    public function destroy(Book $book)
+    {
+        $book->delete();
+
+        return redirect('/books');
     }
 
     protected function vadateRequest()
